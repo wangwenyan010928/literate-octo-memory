@@ -33,7 +33,7 @@
             background-color: #34495e;
             padding: 20px;
             color: white;
-            font-size: 20px; /* 调整字体大小 */
+            font-size: 20px;
         }
 
         #sidebar ul {
@@ -74,18 +74,24 @@
         }
 
         .button-group button {
-            padding: 15px 30px; /* 调整按钮大小 */
+            padding: 15px 30px;
             margin-right: 10px;
             border: none;
             background-color: #0073e6;
             color: white;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 20px; /* 调整按钮字体大小 */
+            font-size: 20px;
         }
 
         .button-group button:hover {
             background-color: #005bb5;
+        }
+
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
         }
     </style>
 </head>
@@ -110,79 +116,11 @@
         <!-- 默认显示业务规范 -->
         <div id="ywgf" class="content-box active">
             <div class="button-group">
-                <button onclick="showSubContent('acid-auto')">酸雨自动观测业务规范</button>
-                <button onclick="showSubContent('acid-standard')">酸雨观测规范</button>
+                <button onclick="showPdf('acid-auto')">酸雨自动观测业务规范</button>
+                <button onclick="showPdf('acid-standard')">酸雨观测规范</button>
             </div>
-            <div id="acid-auto" class="sub-content">
-                <p>这里显示《酸雨自动观测业务规范》的内容</p>
-            </div>
-            <div id="acid-standard" class="sub-content" style="display: none;">
-                <p>这里显示《酸雨观测规范》的内容</p>
-            </div>
-        </div>
-
-        <div id="gzzd" class="content-box">
-            <div class="button-group">
-                <button onclick="showSubContent('duty')">值班制度</button>
-                <button onclick="showSubContent('management')">管理制度</button>
-                <button onclick="showSubContent('duty-flow')">值班流程</button>
-                <button onclick="showSubContent('emergency')">应急预案</button>
-            </div>
-            <div id="duty" class="sub-content" style="display: none;">
-                <p>这里显示《值班制度》的内容</p>
-            </div>
-            <div id="management" class="sub-content" style="display: none;">
-                <p>这里显示《管理制度》的内容</p>
-            </div>
-            <div id="duty-flow" class="sub-content" style="display: none;">
-                <p>这里显示《值班流程》的内容</p>
-            </div>
-            <div id="emergency" class="sub-content" style="display: none;">
-                <p>这里显示《应急预案》的内容</p>
-            </div>
-        </div>
-
-        <div id="ywgl" class="content-box">
-            <div class="button-group">
-                <button onclick="showSubContent('report')">制作环境报告书</button>
-                <button onclick="showSubContent('maintenance')">设备维护及检查</button>
-                <button onclick="showSubContent('calibration')">设备校准和定期维护</button>
-            </div>
-            <div id="report" class="sub-content" style="display: none;">
-                <p>这里显示《制作环境报告书》的内容</p>
-            </div>
-            <div id="maintenance" class="sub-content" style="display: none;">
-                <p>这里显示《设备维护及检查》的内容</p>
-            </div>
-            <div id="calibration" class="sub-content" style="display: none;">
-                <p>这里显示《设备校准和定期维护》的内容</p>
-            </div>
-        </div>
-
-        <div id="jljd" class="content-box">
-            <div class="button-group">
-                <button onclick="showSubContent('add-check')">添加检定功能</button>
-                <button onclick="showSubContent('record')">台站大事事件登记</button>
-            </div>
-            <div id="add-check" class="sub-content" style="display: none;">
-                <p>这里显示《添加检定功能》的内容</p>
-            </div>
-            <div id="record" class="sub-content" style="display: none;">
-                <p>这里显示《台站大事事件登记》的内容</p>
-            </div>
-        </div>
-
-        <div id="zlts" class="content-box">
-            <div class="button-group">
-                <button onclick="showSubContent('equipment')">检查设备、储备设备</button>
-                <button onclick="showSubContent('records')">数据记录和审核</button>
-            </div>
-            <div id="equipment" class="sub-content" style="display: none;">
-                <p>这里显示《检查设备、储备设备》的内容</p>
-            </div>
-            <div id="records" class="sub-content" style="display: none;">
-                <p>这里显示《数据记录和审核》的内容</p>
-            </div>
+            <!-- 这里的 iframe 用于显示 PDF 文件 -->
+            <iframe id="pdf-viewer" src="" type="application/pdf"></iframe>
         </div>
     </div>
 </div>
@@ -197,23 +135,15 @@
 
         // 显示点击的内容框
         document.getElementById(id).classList.add('active');
-
-        // 隐藏所有子内容
-        var subContents = document.querySelectorAll('.sub-content');
-        subContents.forEach(function(sub) {
-            sub.style.display = 'none';
-        });
     }
 
-    function showSubContent(id) {
-        // 隐藏所有子内容
-        var subContents = document.querySelectorAll('.sub-content');
-        subContents.forEach(function(sub) {
-            sub.style.display = 'none';
-        });
-
-        // 显示点击的子内容
-        document.getElementById(id).style.display = 'block';
+    function showPdf(pdfType) {
+        var iframe = document.getElementById('pdf-viewer');
+        if (pdfType === 'acid-auto') {
+            iframe.src = './酸雨自动观测业务规范.pdf';  // 请确保文件名和路径正确
+        } else if (pdfType === 'acid-standard') {
+            iframe.src = './酸雨观测规范.pdf';  // 请确保文件名和路径正确
+        }
     }
 </script>
 
