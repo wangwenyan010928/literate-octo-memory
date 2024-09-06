@@ -114,14 +114,37 @@
     </div>
 
     <div id="main-content">
-        <!-- 默认显示业务规范 -->
+        <!-- 业务规范 -->
         <div id="ywgf" class="content-box active">
             <div class="button-group">
                 <button onclick="showPdf('acid-auto')">酸雨自动观测业务规范</button>
                 <button onclick="showPdf('acid-standard')">酸雨观测规范</button>
             </div>
-            <!-- 这里的 iframe 用于显示 PDF 文件 -->
             <iframe id="pdf-viewer" src="" type="application/pdf"></iframe>
+        </div>
+
+        <!-- 规章制度 -->
+        <div id="gzzd" class="content-box">
+            <h2>规章制度内容</h2>
+            <p>这里是规章制度的相关内容。</p>
+        </div>
+
+        <!-- 业务工作 -->
+        <div id="ywgl" class="content-box">
+            <h2>业务工作内容</h2>
+            <p>这里是业务工作的相关内容。</p>
+        </div>
+
+        <!-- 计量检定 -->
+        <div id="jljd" class="content-box">
+            <h2>计量检定内容</h2>
+            <p>这里是计量检定的相关内容。</p>
+        </div>
+
+        <!-- 质量体系内审检查 -->
+        <div id="zlts" class="content-box">
+            <h2>质量体系内审检查内容</h2>
+            <p>这里是质量体系内审检查的相关内容。</p>
         </div>
     </div>
 </div>
@@ -136,6 +159,12 @@
 
         // 显示点击的内容框
         document.getElementById(id).classList.add('active');
+
+        // 清空 PDF 显示框
+        var iframe = document.getElementById('pdf-viewer');
+        if (iframe) {
+            iframe.src = '';
+        }
     }
 
     function showPdf(pdfType) {
